@@ -1,7 +1,11 @@
-﻿using BlikPrismApp.ViewModels;
+﻿using BlikPrismApp.Services.Blik;
+using BlikPrismApp.Services.SignIn;
+using BlikPrismApp.ViewModels;
 using BlikPrismApp.Views;
 using Prism;
 using Prism.Ioc;
+using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,20 +14,27 @@ namespace BlikPrismApp
 {
     public partial class App
     {
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
-         * This imposes a limitation in which the App class must have a default constructor. 
-         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
-        public App() : this(null) { }
-
         public App(IPlatformInitializer initializer) : base(initializer) { }
 
         protected override async void OnInitialized()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            await NavigationService.NavigateAsync(nameof(LoginPage));
+                await NavigationService.NavigateAsync(nameof(LoginPage));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        protected override async void OnResume()
+        {
+            base.OnResume();
+
+            await NavigationService.NavigateAsync($"/{nameof(LoginPage)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -35,6 +46,9 @@ namespace BlikPrismApp
 
             containerRegistry.RegisterForNavigation<BlikCodePage, BlikCodePageViewModel>();
             containerRegistry.RegisterForNavigation<BlikConfirmationPage, BlikConfirmationPageViewModel>();
+
+            containerRegistry.Register<ISignInService, SignInService>();
+            containerRegistry.Register<IBlikService, BlikService>();
         }
     }
 }

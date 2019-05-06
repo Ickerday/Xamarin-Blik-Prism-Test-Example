@@ -57,12 +57,12 @@ namespace BlikPrismApp.ViewModels
         {
             try
             {
-                var isSignedIn = await _signInService.SignInAsync(Username, Password);
+                //var isSignedIn = await _signInService.SignInAsync(Username, Password);
 
-                if (isSignedIn)
-                    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainPage)}");
-
-                throw new Exception("Couldn't sign in.");
+                if (true)
+                    await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
+                else
+                    throw new Exception("Couldn't sign in.");
             }
             catch (Exception ex)
             {

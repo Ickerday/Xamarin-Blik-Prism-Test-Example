@@ -9,8 +9,11 @@
         <Image Source="https://assets.reviews.com/uploads/2018/04/12235315/U.S.-Bank-Cash-Visa-Signature.png" 
                Margin="0, 5"/>
 
-        <StackLayout>
+        <StackLayout HorizontalOptions="CenterAndExpand" 
+                     VerticalOptions="CenterAndExpand">
+            
             <ImageButton Source="https://www.bankmillennium.pl/documents/10184/25664335/jak-dziala-blik-krok-1.png"  />
+            
         </StackLayout>
 
     </StackLayout>

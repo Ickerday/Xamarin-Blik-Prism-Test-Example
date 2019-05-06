@@ -19,7 +19,7 @@ namespace BlikPrismApp.Services.SignIn
         {
             apiService = RestService.For<ISignInApiService>(new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:8080")
+                BaseAddress = new Uri(Constants.ApiUrl)
             });
         }
 

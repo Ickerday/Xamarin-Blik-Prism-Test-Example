@@ -28,7 +28,7 @@ namespace BlikPrismApp.Api
 
             return !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)
                 ? (ActionResult)new OkObjectResult($"Hello, {username}")
-                : new BadRequestObjectResult("Please provide username and password");
+                : new BadRequestObjectResult($"Please provide {nameof(username)} and {nameof(password)}");
         }
     }
 }
