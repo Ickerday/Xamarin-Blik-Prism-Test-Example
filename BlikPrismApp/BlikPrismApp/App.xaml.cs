@@ -30,7 +30,9 @@ namespace BlikPrismApp
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+
             containerRegistry.RegisterForNavigation<BlikCodePage, BlikCodePageViewModel>();
             containerRegistry.RegisterForNavigation<BlikConfirmationPage, BlikConfirmationPageViewModel>();
         }

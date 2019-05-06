@@ -1,32 +1,75 @@
-﻿using Prism.Commands;
+﻿using BlikPrismApp.Services.SignIn;
+using BlikPrismApp.Views;
+using Prism.Commands;
 using Prism.Navigation;
-using System.Threading.Tasks;
+using Prism.Services;
+using System;
+using Xamarin.Forms;
 
 namespace BlikPrismApp.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
-        private string _username;
-        public string Username { get => _username; set => SetProperty(ref _username, value); }
+        #region SERVICES
+        public readonly ISignInService _signInService;
+        private readonly IPageDialogService _dialogService;
+        #endregion
 
-        private string _password;
-        public string Password { get => _password; set => SetProperty(ref _password, value); }
+        #region PROPS
+        private string _username = string.Empty;
+        public string Username
+        {
+            get => _username; set
+            {
+                SetProperty(ref _username, value);
+                IsLoginEnabled = IsLoginInfoValid();
+            }
+        }
 
-        //private bool _isEnabled;
-        //public string IsEnabled { get => _isEnabled; set => SetProperty(ref _isEnabled, value); }
-        public bool IsEnabled => string.IsNullOrWhiteSpace(Password) && string.IsNullOrWhiteSpace(Password);
+        private string _password = string.Empty;
+        public string Password
+        {
+            get => _password; set
+            {
+                SetProperty(ref _password, value);
+                IsLoginEnabled = IsLoginInfoValid();
+            }
+        }
 
+        private bool _isLoginEnabled;
+        public bool IsLoginEnabled { get => _isLoginEnabled; set => SetProperty(ref _isLoginEnabled, value); }
+        #endregion
+
+        #region COMMANDS
         private DelegateCommand _loginCommand;
         public DelegateCommand LoginCommand =>
-            _loginCommand ?? (_loginCommand = new DelegateCommand(async () => await ExecuteLoginCommand()));
+            _loginCommand ?? (_loginCommand = new DelegateCommand(ExecuteLoginCommand, IsLoginInfoValid));
+        #endregion
 
-        public LoginPageViewModel(INavigationService navigationService) : base(navigationService) { }
-
-        private async Task ExecuteLoginCommand()
+        public LoginPageViewModel(INavigationService navigationService, IPageDialogService dialogService,
+            ISignInService signInService) : base(navigationService)
         {
-            await Task.CompletedTask;
-
-
+            _dialogService = dialogService;
+            _signInService = signInService;
         }
+
+        private async void ExecuteLoginCommand()
+        {
+            try
+            {
+                var isSignedIn = await _signInService.SignInAsync(Username, Password);
+
+                if (isSignedIn)
+                    await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainPage)}");
+
+                throw new Exception("Couldn't sign in.");
+            }
+            catch (Exception ex)
+            {
+                await _dialogService.DisplayAlertAsync("Oops!", ex.Message, "Ok");
+            }
+        }
+
+        private bool IsLoginInfoValid() => !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(Password);
     }
 }

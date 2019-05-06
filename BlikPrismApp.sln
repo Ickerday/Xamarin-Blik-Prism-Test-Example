@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlikPrismApp", "BlikPrismApp\BlikPrismApp\BlikPrismApp.csproj", "{76C9B8CD-C9EB-4B88-9820-202F0B34DD27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlikPrismApp", "BlikPrismApp\BlikPrismApp\BlikPrismApp.csproj", "{76C9B8CD-C9EB-4B88-9820-202F0B34DD27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlikPrismApp.Android", "BlikPrismApp\BlikPrismApp.Android\BlikPrismApp.Android.csproj", "{684706F9-A202-454D-AEF3-DAC82FE0DDB4}"
 EndProject
@@ -13,7 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{2769
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02CE7925-27EE-4D1B-BDA1-89DC1ECF342D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlikPrismApp.Tests", "BlikPrismApp.Tests\BlikPrismApp.Tests.csproj", "{1BBE9562-D16B-4037-B265-D8C3E829E1BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlikPrismApp.Tests", "BlikPrismApp.Tests\BlikPrismApp.Tests.csproj", "{1BBE9562-D16B-4037-B265-D8C3E829E1BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{DAE49871-9DFA-4C96-AEC5-0883D9DF960D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlikPrismApp.Api", "BlikPrismApp.Api\BlikPrismApp.Api.csproj", "{04DC099E-4201-4F36-B199-DC951553739C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +139,30 @@ Global
 		{1BBE9562-D16B-4037-B265-D8C3E829E1BB}.Release|iPhone.Build.0 = Release|Any CPU
 		{1BBE9562-D16B-4037-B265-D8C3E829E1BB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{1BBE9562-D16B-4037-B265-D8C3E829E1BB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Release|iPhone.Build.0 = Release|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{04DC099E-4201-4F36-B199-DC951553739C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +171,7 @@ Global
 		{684706F9-A202-454D-AEF3-DAC82FE0DDB4} = {27690643-7227-44BC-94BA-9B2BFD97A1C8}
 		{20D6732B-0848-41D0-86FC-E615972EA09C} = {27690643-7227-44BC-94BA-9B2BFD97A1C8}
 		{1BBE9562-D16B-4037-B265-D8C3E829E1BB} = {02CE7925-27EE-4D1B-BDA1-89DC1ECF342D}
+		{04DC099E-4201-4F36-B199-DC951553739C} = {DAE49871-9DFA-4C96-AEC5-0883D9DF960D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {929C23A3-8AF1-46ED-B0DB-C89290005485}

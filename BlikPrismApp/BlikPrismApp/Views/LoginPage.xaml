@@ -2,47 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:viewmodels="clr-namespace:BlikPrismApp.ViewModels"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlikPrismApp.Views.LoginPage">
 
-    <!--<ContentPage.BindingContext>
-        <viewmodels:LoginPageViewModel />
-    </ContentPage.BindingContext>-->
-
     <ContentPage.Content>
-        <StackLayout Margin="5, 0"
+        <StackLayout Padding="5"
                      HorizontalOptions="CenterAndExpand" 
                      VerticalOptions="CenterAndExpand">
-            
+
             <Label Text="Sign in to your account"
                    FontSize="Large"
                    Margin="5, 10"/>
 
-            <Grid RowSpacing="0" 
-                  ColumnSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+            <StackLayout>
 
                 <Entry Text="{Binding Username, Mode=OneWayToSource}"
-                       Placeholder="Username" 
-                       HorizontalOptions="CenterAndExpand"
-                       Grid.Row="0" />
+                       Placeholder="Username"
+                       HorizontalOptions="CenterAndExpand" />
 
                 <Entry Text="{Binding Password, Mode=OneWayToSource}"
                        Placeholder="Password"
-                       HorizontalOptions="CenterAndExpand"
-                       Grid.Row="1" />
-            </Grid>
+                       HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
 
             <Button Text="Sign in"
-                    Command="{Binding LoginCommand}"
-                    IsEnabled="{Binding IsEnabled}" />
+                    Command="{Binding LoginCommand}" 
+                    IsEnabled="{Binding IsLoginEnabled}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

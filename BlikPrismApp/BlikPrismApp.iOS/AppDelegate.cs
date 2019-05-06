@@ -13,6 +13,10 @@ namespace BlikPrismApp.iOS
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert, new NSSet());
+            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+            UIApplication.SharedApplication.RegisterForRemoteNotifications();
+
             Forms.Init();
             LoadApplication(new App(new IOSInitializer()));
 
