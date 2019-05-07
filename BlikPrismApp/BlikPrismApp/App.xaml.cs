@@ -22,7 +22,7 @@ namespace BlikPrismApp
             {
                 InitializeComponent();
 
-                await NavigationService.NavigateAsync(nameof(LoginPage));
+                await NavigationService.NavigateAsync($"/{nameof(SignInPage)}");
             }
             catch (Exception ex)
             {
@@ -34,7 +34,7 @@ namespace BlikPrismApp
         {
             base.OnResume();
 
-            await NavigationService.NavigateAsync($"/{nameof(LoginPage)}");
+            await NavigationService.NavigateAsync($"/{nameof(SignInPage)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -42,13 +42,17 @@ namespace BlikPrismApp
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
 
-            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            #region PAGES
+            containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
 
             containerRegistry.RegisterForNavigation<BlikCodePage, BlikCodePageViewModel>();
             containerRegistry.RegisterForNavigation<BlikConfirmationPage, BlikConfirmationPageViewModel>();
+            #endregion
 
+            #region SERVICES
             containerRegistry.Register<ISignInService, SignInService>();
             containerRegistry.Register<IBlikService, BlikService>();
+            #endregion
         }
     }
 }

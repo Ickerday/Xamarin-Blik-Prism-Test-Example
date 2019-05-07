@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace BlikPrismApp.ViewModels
 {
-    public class LoginPageViewModel : ViewModelBase
+    public class SignInPageViewModel : ViewModelBase
     {
         #region SERVICES
         public readonly ISignInService _signInService;
@@ -42,24 +42,28 @@ namespace BlikPrismApp.ViewModels
 
         #region COMMANDS
         private DelegateCommand _loginCommand;
-        public DelegateCommand LoginCommand =>
-            _loginCommand ?? (_loginCommand = new DelegateCommand(ExecuteLoginCommand, IsLoginInfoValid));
+        public DelegateCommand LoginCommand => _loginCommand 
+            ?? (_loginCommand = new DelegateCommand(ExecuteLoginCommand, IsLoginInfoValid));
         #endregion
 
-        public LoginPageViewModel(INavigationService navigationService, IPageDialogService dialogService,
+        public SignInPageViewModel(INavigationService navigationService, IPageDialogService dialogService,
             ISignInService signInService) : base(navigationService)
         {
+            Title = "Sign in to account";
+
             _dialogService = dialogService;
             _signInService = signInService;
         }
 
         private async void ExecuteLoginCommand()
         {
+            IsLoginEnabled = false;
+
             try
             {
-                //var isSignedIn = await _signInService.SignInAsync(Username, Password);
+                var isSignedIn = await _signInService.SignInAsync(Username, Password);
 
-                if (true)
+                if (isSignedIn)
                     await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
                 else
                     throw new Exception("Couldn't sign in.");
@@ -67,6 +71,10 @@ namespace BlikPrismApp.ViewModels
             catch (Exception ex)
             {
                 await _dialogService.DisplayAlertAsync("Oops!", ex.Message, "Ok");
+            }
+            finally
+            {
+                IsLoginEnabled = true;
             }
         }
 

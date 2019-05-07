@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace BlikPrismApp.Api
+namespace BlikPrismApp.Api.Functions
 {
     public static class SignIn
     {

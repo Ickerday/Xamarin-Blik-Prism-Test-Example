@@ -1,7 +1,9 @@
-﻿namespace BlikPrismApp
+﻿using System;
+
+namespace BlikPrismApp
 {
     public class Constants
     {
-        public const string ApiUrl = "http://localhost:7071";
+        public static Uri ApiUrl = new Uri("http://10.101.25.67:7071/api");
     }
 }

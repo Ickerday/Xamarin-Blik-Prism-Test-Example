@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="BlikPrismApp.Views.LoginPage">
+             x:Class="BlikPrismApp.Views.SignInPage"
+             Title="{Binding Title}">
 
     <ContentPage.Content>
         <StackLayout Padding="5"
                      HorizontalOptions="CenterAndExpand" 
-                     VerticalOptions="CenterAndExpand">
+                     VerticalOptions="StartAndExpand">
 
             <Label Text="Sign in to your account"
                    FontSize="Large"
@@ -26,7 +27,7 @@
             </StackLayout>
 
             <Button Text="Sign in"
-                    Command="{Binding LoginCommand}" 
+                    Command="{Binding LoginCommand}"
                     IsEnabled="{Binding IsLoginEnabled}" />
         </StackLayout>
     </ContentPage.Content>

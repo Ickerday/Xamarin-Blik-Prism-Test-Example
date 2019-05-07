@@ -1,5 +1,4 @@
 ﻿using Refit;
-using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -8,7 +7,7 @@ namespace BlikPrismApp.Services.SignIn
     public interface ISignInApiService
     {
         [Post("/signin")]
-        Task<HttpResponseMessage> SignInAsync([Body] object userData);
+        Task<HttpResponseMessage> SignInAsync([Body] UserDto userData);
     }
 
     public class SignInService : ISignInService
@@ -18,14 +17,13 @@ namespace BlikPrismApp.Services.SignIn
         public SignInService()
         {
             apiService = RestService.For<ISignInApiService>(new HttpClient
-            {
-                BaseAddress = new Uri(Constants.ApiUrl)
-            });
+            { BaseAddress = Constants.ApiUrl });
         }
 
         public async Task<bool> SignInAsync(string username, string password)
         {
-            var response = await apiService.SignInAsync(new { username, password });
+            var userData = new UserDto(username, password);
+            var response = await apiService.SignInAsync(userData);
             return response.IsSuccessStatusCode;
         }
     }
