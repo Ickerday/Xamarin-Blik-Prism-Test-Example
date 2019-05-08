@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{2769
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02CE7925-27EE-4D1B-BDA1-89DC1ECF342D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlikPrismApp.Tests", "BlikPrismApp.Tests\BlikPrismApp.Tests.csproj", "{1BBE9562-D16B-4037-B265-D8C3E829E1BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlikPrismApp.UnitTests", "BlikPrismApp.Tests\BlikPrismApp.UnitTests.csproj", "{1BBE9562-D16B-4037-B265-D8C3E829E1BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{DAE49871-9DFA-4C96-AEC5-0883D9DF960D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlikPrismApp.Api", "BlikPrismApp.Api\BlikPrismApp.Api.csproj", "{04DC099E-4201-4F36-B199-DC951553739C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlikPrismApp.Api", "BlikPrismApp.Api\BlikPrismApp.Api.csproj", "{04DC099E-4201-4F36-B199-DC951553739C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
