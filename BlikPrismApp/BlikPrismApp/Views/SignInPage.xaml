@@ -19,16 +19,24 @@
 
                 <Entry Text="{Binding Username, Mode=OneWayToSource}"
                        Placeholder="Username"
+                       IsEnabled="{Binding IsInputEnabled}"
                        HorizontalOptions="CenterAndExpand" />
 
                 <Entry Text="{Binding Password, Mode=OneWayToSource}"
                        Placeholder="Password"
+                       IsEnabled="{Binding IsInputEnabled}"
+                       IsPassword="True"
                        HorizontalOptions="CenterAndExpand" />
+
             </StackLayout>
 
             <Button Text="Sign in"
                     Command="{Binding LoginCommand}"
                     IsEnabled="{Binding IsLoginEnabled}" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

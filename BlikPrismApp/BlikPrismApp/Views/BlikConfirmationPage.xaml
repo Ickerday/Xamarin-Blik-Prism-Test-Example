@@ -4,5 +4,23 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlikPrismApp.Views.BlikConfirmationPage">
-  
+    <StackLayout Margin="5" 
+                 Spacing="20">
+        <StackLayout Margin="10" Spacing="5">
+
+            <Label Text="{Binding Recipient}" />
+
+            <Label Text="{Binding OperationName}" />
+
+            <Label Text="{Binding Amount}" />
+
+        </StackLayout>
+
+        <Label Text="Confirm payment:" />
+
+        <Entry Placeholder="PIN" />
+
+        <Button Text="Confirm" />
+
+    </StackLayout>
 </ContentPage>

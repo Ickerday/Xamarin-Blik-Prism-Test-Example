@@ -1,12 +1,7 @@
-﻿using Xamarin.Forms;
-
-namespace BlikPrismApp.Views
+﻿namespace BlikPrismApp.Views
 {
-    public partial class BlikCodePage : ContentPage
+    public partial class BlikCodePage
     {
-        public BlikCodePage()
-        {
-            InitializeComponent();
-        }
+        public BlikCodePage() => InitializeComponent();
     }
 }

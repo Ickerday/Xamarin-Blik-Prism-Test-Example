@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="BlikPrismApp.Views.AccountPage"
+             Title="{Binding Title}">
+
+    <StackLayout Padding="5, 15, 0, 0"
+                 Spacing="50"
+                 HorizontalOptions="CenterAndExpand" 
+                 VerticalOptions="FillAndExpand">
+
+        <Grid Margin="0, 15, 0, 0"
+              HeightRequest="250"
+              WidthRequest="500"
+              RowSpacing="0"
+              ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Source="https://assets.reviews.com/uploads/2018/04/12235315/U.S.-Bank-Cash-Visa-Signature.png"
+                   Aspect="AspectFit"
+                   Grid.Row="0"
+                   Grid.Column="0" />
+
+        </Grid>
+        <StackLayout HorizontalOptions="CenterAndExpand"
+                     Margin="0, 0, 0, 15">
+
+            <Label Text="{Binding Username}"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Center"
+                   Margin="0, 0, 0, 20" />
+
+            <ImageButton Source="https://www.bankmillennium.pl/documents/10184/25664335/jak-dziala-blik-krok-1.png"
+                         Command="{Binding GetBlikCodeCommand}"
+                         HeightRequest="75"
+                         WidthRequest="75"
+                         CornerRadius="{OnPlatform Android='75', iOS='20'}"
+                         BackgroundColor="Accent" />
+
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

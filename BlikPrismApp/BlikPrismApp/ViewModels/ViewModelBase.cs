@@ -1,38 +1,34 @@
 ﻿using Prism.Mvvm;
 using Prism.Navigation;
+using System.Threading.Tasks;
 
 namespace BlikPrismApp.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
-        protected INavigationService NavigationService { get; private set; }
+        protected readonly INavigationService NavigationService;
 
+        #region PROPS
         private string _title;
         public string Title { get => _title; set => SetProperty(ref _title, value); }
 
-        public ViewModelBase(INavigationService navigationService)
-        {
+        private bool _isBusy;
+        public bool IsBusy { get => _isBusy; set => SetProperty(ref _isBusy, value); }
+        #endregion
+
+        public ViewModelBase(INavigationService navigationService) =>
             NavigationService = navigationService;
-        }
 
-        public virtual void OnNavigatedFrom(INavigationParameters parameters)
-        {
+        public virtual async void OnNavigatedFrom(INavigationParameters parameters) =>
+            await Task.CompletedTask;
 
-        }
+        public virtual async void OnNavigatedTo(INavigationParameters parameters) =>
+            await Task.CompletedTask;
 
-        public virtual void OnNavigatedTo(INavigationParameters parameters)
-        {
+        public virtual async void OnNavigatingTo(INavigationParameters parameters) =>
+            await Task.CompletedTask;
 
-        }
-
-        public virtual void OnNavigatingTo(INavigationParameters parameters)
-        {
-
-        }
-
-        public virtual void Destroy()
-        {
-
-        }
+        public virtual async void Destroy() =>
+            await Task.CompletedTask;
     }
 }

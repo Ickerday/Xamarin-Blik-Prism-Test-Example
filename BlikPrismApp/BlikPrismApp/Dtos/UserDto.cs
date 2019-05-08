@@ -1,13 +1,13 @@
-﻿using Refit;
+﻿using Newtonsoft.Json;
 
 namespace BlikPrismApp.Services.SignIn
 {
     public class UserDto
     {
-        [AliasAs("username")]
+        [JsonProperty(PropertyName = "username")]
         public string Username { get; set; }
 
-        [AliasAs("password")]
+        [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
 
         public UserDto(string username, string password)

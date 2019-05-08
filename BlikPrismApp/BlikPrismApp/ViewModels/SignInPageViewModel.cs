@@ -38,11 +38,14 @@ namespace BlikPrismApp.ViewModels
 
         private bool _isLoginEnabled;
         public bool IsLoginEnabled { get => _isLoginEnabled; set => SetProperty(ref _isLoginEnabled, value); }
+
+        private bool _isInputEnabled;
+        public bool IsInputEnabled { get => _isInputEnabled; set => SetProperty(ref _isInputEnabled, value); }
         #endregion
 
         #region COMMANDS
         private DelegateCommand _loginCommand;
-        public DelegateCommand LoginCommand => _loginCommand 
+        public DelegateCommand LoginCommand => _loginCommand
             ?? (_loginCommand = new DelegateCommand(ExecuteLoginCommand, IsLoginInfoValid));
         #endregion
 
@@ -50,6 +53,7 @@ namespace BlikPrismApp.ViewModels
             ISignInService signInService) : base(navigationService)
         {
             Title = "Sign in to account";
+            IsInputEnabled = true;
 
             _dialogService = dialogService;
             _signInService = signInService;
@@ -57,16 +61,19 @@ namespace BlikPrismApp.ViewModels
 
         private async void ExecuteLoginCommand()
         {
-            IsLoginEnabled = false;
+            IsLoginEnabled = IsInputEnabled = false;
+            IsBusy = true;
 
             try
             {
-                var isSignedIn = await _signInService.SignInAsync(Username, Password);
+                var userDto = new UserDto(Username, Password);
+                var isSignedIn = await _signInService.SignInAsync(userDto);
 
                 if (isSignedIn)
-                    await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
+                    await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(AccountPage)}",
+                        new NavigationParameters($"{nameof(Username).ToLower()}={Username}"));
                 else
-                    throw new Exception("Couldn't sign in.");
+                    throw new OperationCanceledException("Couldn't sign in.");
             }
             catch (Exception ex)
             {
@@ -74,10 +81,12 @@ namespace BlikPrismApp.ViewModels
             }
             finally
             {
-                IsLoginEnabled = true;
+                IsLoginEnabled = IsInputEnabled = true;
+                IsBusy = false;
             }
         }
 
-        private bool IsLoginInfoValid() => !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(Password);
+        private bool IsLoginInfoValid() => !string.IsNullOrWhiteSpace(Password)
+            && !string.IsNullOrWhiteSpace(Password);
     }
 }

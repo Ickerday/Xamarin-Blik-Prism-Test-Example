@@ -4,5 +4,18 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlikPrismApp.Views.BlikCodePage">
-  
+    <ContentPage.Content>
+        <StackLayout Padding="5">
+
+            <Label Text="Your BLIK code:"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="30" />
+
+            <Label Text="{Binding BlikCode}"
+                   HorizontalOptions="CenterAndExpand" 
+                   Margin="5"
+                   FontSize="40" />
+
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

@@ -12,18 +12,19 @@ namespace BlikPrismApp.Services.SignIn
 
     public class SignInService : ISignInService
     {
-        private readonly ISignInApiService apiService;
+        private readonly ISignInApiService _apiService;
+
+        public SignInService(ISignInApiService apiService) => _apiService = apiService;
 
         public SignInService()
         {
-            apiService = RestService.For<ISignInApiService>(new HttpClient
+            _apiService = RestService.For<ISignInApiService>(new HttpClient
             { BaseAddress = Constants.ApiUrl });
         }
 
-        public async Task<bool> SignInAsync(string username, string password)
+        public async Task<bool> SignInAsync(UserDto userDto)
         {
-            var userData = new UserDto(username, password);
-            var response = await apiService.SignInAsync(userData);
+            var response = await _apiService.SignInAsync(userDto);
             return response.IsSuccessStatusCode;
         }
     }

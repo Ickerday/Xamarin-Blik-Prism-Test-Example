@@ -40,7 +40,7 @@ namespace BlikPrismApp
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<AccountPage, AccountPageViewModel>();
 
             #region PAGES
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();

@@ -1,12 +1,7 @@
-﻿using Xamarin.Forms;
-
-namespace BlikPrismApp.Views
+﻿namespace BlikPrismApp.Views
 {
-    public partial class BlikConfirmationPage : ContentPage
+    public partial class BlikConfirmationPage
     {
-        public BlikConfirmationPage()
-        {
-            InitializeComponent();
-        }
+        public BlikConfirmationPage() => InitializeComponent();
     }
 }
