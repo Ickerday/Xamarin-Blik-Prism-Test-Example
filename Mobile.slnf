@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "BlikPrismApp.sln",
+    "projects": [
+      "BlikPrismApp\\BlikPrismApp.Android\\BlikPrismApp.Android.csproj",
+      "BlikPrismApp\\BlikPrismApp.iOS\\BlikPrismApp.iOS.csproj",
+      "BlikPrismApp\\BlikPrismApp\\BlikPrismApp.csproj"
+    ]
+  }
+}

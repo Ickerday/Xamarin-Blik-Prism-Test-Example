@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "BlikPrismApp.sln",
+    "projects": [
+      "BlikPrismApp.Api\\BlikPrismApp.Api.csproj"
+    ]
+  }
+}
