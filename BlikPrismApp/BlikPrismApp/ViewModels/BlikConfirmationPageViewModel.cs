@@ -16,7 +16,7 @@ namespace BlikPrismApp.ViewModels
         public BlikConfirmationPageViewModel(INavigationService navigationService) : base(navigationService) =>
             Title = "Confirm BLIK payment";
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
             string recipient;
             Recipient = parameters.TryGetValue(nameof(recipient), out recipient)
@@ -33,7 +33,7 @@ namespace BlikPrismApp.ViewModels
                 ? amount
                 : 0;
 
-            base.OnNavigatedTo(parameters);
+            base.OnNavigatingTo(parameters);
         }
     }
 }
