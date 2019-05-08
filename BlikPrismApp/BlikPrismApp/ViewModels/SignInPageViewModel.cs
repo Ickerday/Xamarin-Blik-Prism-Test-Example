@@ -39,7 +39,7 @@ namespace BlikPrismApp.ViewModels
         private bool _isLoginEnabled;
         public bool IsLoginEnabled { get => _isLoginEnabled; set => SetProperty(ref _isLoginEnabled, value); }
 
-        private bool _isInputEnabled;
+        private bool _isInputEnabled = true;
         public bool IsInputEnabled { get => _isInputEnabled; set => SetProperty(ref _isInputEnabled, value); }
         #endregion
 
@@ -53,7 +53,6 @@ namespace BlikPrismApp.ViewModels
             ISignInService signInService) : base(navigationService)
         {
             Title = "Sign in to account";
-            IsInputEnabled = true;
 
             _dialogService = dialogService;
             _signInService = signInService;
@@ -61,6 +60,12 @@ namespace BlikPrismApp.ViewModels
 
         private async void ExecuteLoginCommand()
         {
+            if (!IsLoginInfoValid())
+            {
+                await _dialogService.DisplayAlertAsync("Oops!", "Invalid login data", "Ok");
+                return;
+            }
+
             IsLoginEnabled = IsInputEnabled = false;
             IsBusy = true;
 
