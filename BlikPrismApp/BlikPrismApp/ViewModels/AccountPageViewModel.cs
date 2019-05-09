@@ -14,22 +14,18 @@ namespace BlikPrismApp.ViewModels
         #region COMMANDS
         private DelegateCommand _getBlikCodeCommand;
         public DelegateCommand GetBlikCodeCommand => _getBlikCodeCommand
-            ?? (_getBlikCodeCommand = new DelegateCommand(ExecuteGetBlikCodeCommand));
+            ?? (_getBlikCodeCommand = new DelegateCommand(ExecuteGetBlikCodeCommand, CanExecuteGetBlikCodeCommand));
         #endregion
 
         public AccountPageViewModel(INavigationService navigationService) : base(navigationService) =>
             Title = "My Account";
-
-        private async void ExecuteGetBlikCodeCommand() =>
-            await NavigationService.NavigateAsync($"{nameof(BlikCodePage)}",
-                new NavigationParameters($"{nameof(Username).ToLower()}={Username}"));
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             IsBusy = true;
 
             Username = parameters.TryGetValue<string>(nameof(Username).ToLower(), out var username)
-                ? username
+                ? username ?? string.Empty
                 : string.Empty;
 
             if (string.IsNullOrWhiteSpace(Username))
@@ -39,5 +35,10 @@ namespace BlikPrismApp.ViewModels
 
             base.OnNavigatingTo(parameters);
         }
+
+        private bool CanExecuteGetBlikCodeCommand() => !string.IsNullOrWhiteSpace(Username);
+
+        private async void ExecuteGetBlikCodeCommand() => await NavigationService.NavigateAsync($"{nameof(BlikCodePage)}",
+            new NavigationParameters($"{nameof(Username).ToLower()}={Username}"));
     }
 }
