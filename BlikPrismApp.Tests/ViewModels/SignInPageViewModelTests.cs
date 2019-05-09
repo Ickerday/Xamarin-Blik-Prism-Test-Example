@@ -30,14 +30,14 @@ namespace BlikPrismApp.UnitTests.ViewModels
             mockSignInService.Setup(s => s.SignInAsync(It.IsAny<UserDto>()))
                 .ReturnsAsync(true);
 
-            var vm = new SignInPageViewModel(mockNavigationService.Object, mockDialogService.Object, mockSignInService.Object)
+            var viewModel = new SignInPageViewModel(mockNavigationService.Object, mockDialogService.Object, mockSignInService.Object)
             {
                 Username = username,
                 Password = password
             };
 
             // ACT
-            Should.NotThrow(vm.LoginCommand.Execute);
+            Should.NotThrow(viewModel.LoginCommand.Execute);
 
             // ASSERT
             mockNavigationService.Verify(n => n.NavigateAsync(It.IsAny<string>(), It.IsAny<INavigationParameters>()), Times.Once);
@@ -64,14 +64,14 @@ namespace BlikPrismApp.UnitTests.ViewModels
             mockSignInService.Setup(s => s.SignInAsync(It.IsAny<UserDto>()))
                 .ReturnsAsync(false);
 
-            var vm = new SignInPageViewModel(mockNavigationService.Object, mockDialogService.Object, mockSignInService.Object)
+            var viewModel = new SignInPageViewModel(mockNavigationService.Object, mockDialogService.Object, mockSignInService.Object)
             {
                 Username = username,
                 Password = password
             };
 
             // ACT
-            Should.NotThrow(vm.LoginCommand.Execute);
+            Should.NotThrow(viewModel.LoginCommand.Execute);
 
             // ASSERT
             mockNavigationService.Verify(n => n.NavigateAsync(It.IsAny<string>(), It.IsAny<INavigationParameters>()), Times.Never);
@@ -99,14 +99,14 @@ namespace BlikPrismApp.UnitTests.ViewModels
             mockSignInService.Setup(s => s.SignInAsync(It.IsAny<UserDto>()))
                 .ReturnsAsync(false);
 
-            var vm = new SignInPageViewModel(mockNavigationService.Object, mockDialogService.Object, mockSignInService.Object)
+            var viewModel = new SignInPageViewModel(mockNavigationService.Object, mockDialogService.Object, mockSignInService.Object)
             {
                 Username = username,
                 Password = password
             };
 
             // ACT
-            Should.NotThrow(vm.LoginCommand.Execute);
+            Should.NotThrow(viewModel.LoginCommand.Execute);
 
             // ASSERT
             mockNavigationService.Verify(n => n.NavigateAsync(It.IsAny<string>(), It.IsAny<INavigationParameters>()), Times.Never);

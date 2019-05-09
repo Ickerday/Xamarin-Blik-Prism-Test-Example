@@ -37,8 +37,17 @@ namespace BlikPrismApp.UnitTests.ViewModels
         [Theory]
         [InlineData(null, null, null)]
         [InlineData("", null, 420)]
+        [InlineData(" ", null, 420)]
         [InlineData(null, "", null)]
+        [InlineData(null, " ", null)]
         [InlineData("", "", 0)]
+        [InlineData("", "", null)]
+        [InlineData(" ", "", 0)]
+        [InlineData(" ", "", null)]
+        [InlineData("", " ", 0)]
+        [InlineData("", " ", null)]
+        [InlineData(" ", " ", 0)]
+        [InlineData(" ", " ", null)]
         public void OnNavigatingTo__ShouldSetDefaultValuesWithWrongNavigationParameters(string recipient, string operationName, int? amount)
         {
             // ARRANGE
@@ -61,6 +70,8 @@ namespace BlikPrismApp.UnitTests.ViewModels
 
             if (amount.HasValue)
                 vm.Amount.ShouldBe(amount.Value);
+            else
+                vm.Amount.ShouldBe(0);
         }
     }
 }
