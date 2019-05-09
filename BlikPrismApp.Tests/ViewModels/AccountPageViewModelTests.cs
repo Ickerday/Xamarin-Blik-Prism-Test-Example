@@ -13,7 +13,7 @@ namespace BlikPrismApp.UnitTests.ViewModels
         [InlineData("test_user1")]
         [InlineData("ąążśźęćń€€óóę")]
         [InlineData("1341234123515asdfasdf")]
-        public void GetBlikCodeCommand__ShouldNavigateToCorrectView(string username)
+        public void GetBlikCodeCommand__ShouldNavigateToCorrectViewOnValidCredentials(string username)
         {
             // ARRANGE
             var parameters = new NavigationParameters
@@ -39,16 +39,13 @@ namespace BlikPrismApp.UnitTests.ViewModels
         [InlineData(null)]
         [InlineData("")]
         [InlineData("    ")]
-        public void GetBlikCodeCommand__ShouldNotNavigateOnInvalidUsername(string username)
+        public void GetBlikCodeCommand__ShouldNotNavigateOnInvalidCredentials(string username)
         {
             // ARRANGE
             var parameters = new NavigationParameters
             { { nameof(username), username }, };
 
             var mockNavigationService = new Mock<INavigationService>();
-            mockNavigationService.Setup(n => n.NavigateAsync($"{nameof(BlikCodePage)}",
-                new NavigationParameters($"{nameof(username)}={username}")))
-                .ReturnsAsync(new Mock<INavigationResult>().Object);
 
             var viewModel = new AccountPageViewModel(mockNavigationService.Object);
 
@@ -60,12 +57,12 @@ namespace BlikPrismApp.UnitTests.ViewModels
         }
 
         [Theory]
-        [InlineData("test_user1")]
-        [InlineData("ąążśźęćń€€óóę")]
-        [InlineData("1341234123515asdfasdf")]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("    ")]
+        [InlineData("test_user1")]
+        [InlineData("ąążśźęćń€€óóę")]
+        [InlineData("1341234123515asdfasdf")]
         public void OnNavigatingTo__ParserNavigationParametersCorrectly(string username)
         {
             // ARRANGE
@@ -73,8 +70,7 @@ namespace BlikPrismApp.UnitTests.ViewModels
             { { nameof(username), username }, };
 
             var mockNavigationService = new Mock<INavigationService>();
-            mockNavigationService.Setup(n => n.NavigateAsync($"/{nameof(SignInPage)}",
-                new NavigationParameters($"{nameof(username)}={username}")))
+            mockNavigationService.Setup(n => n.NavigateAsync($"/{nameof(SignInPage)}"))
                 .ReturnsAsync(new Mock<INavigationResult>().Object);
 
             var viewModel = new AccountPageViewModel(mockNavigationService.Object);
@@ -85,19 +81,19 @@ namespace BlikPrismApp.UnitTests.ViewModels
             // ASSERT
             viewModel.Username.ShouldBeSameAs(username ?? string.Empty);
         }
+
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("    ")]
-        public void OnNavigatingTo__NavigatesToSignInPageOnInvalidUsername(string username)
+        public void OnNavigatingTo__NavigatesToSignInPageOnInvalidCredentials(string username)
         {
             // ARRANGE
             var parameters = new NavigationParameters
             { { nameof(username), username }, };
 
             var mockNavigationService = new Mock<INavigationService>();
-            mockNavigationService.Setup(n => n.NavigateAsync($"/{nameof(SignInPage)}",
-                new NavigationParameters($"{nameof(username)}={username}")))
+            mockNavigationService.Setup(n => n.NavigateAsync($"/{nameof(SignInPage)}"))
                 .ReturnsAsync(new Mock<INavigationResult>().Object);
 
             var viewModel = new AccountPageViewModel(mockNavigationService.Object);
@@ -106,8 +102,7 @@ namespace BlikPrismApp.UnitTests.ViewModels
             Should.NotThrow(() => viewModel.OnNavigatingTo(parameters));
 
             // ASSERT
-            mockNavigationService.Verify(n => n.NavigateAsync($"/{nameof(SignInPage)}",
-                new NavigationParameters($"{nameof(username)}={username}")), Times.Never);
+            mockNavigationService.Verify(n => n.NavigateAsync($"/{nameof(SignInPage)}"), Times.Once);
 
         }
     }
