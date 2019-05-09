@@ -33,7 +33,7 @@ namespace BlikPrismApp.ViewModels
 
             string username;
             username = parameters.TryGetValue(nameof(username), out username)
-                ? username
+                ? username ?? string.Empty
                 : string.Empty;
 
             if (string.IsNullOrWhiteSpace(username))
@@ -55,25 +55,25 @@ namespace BlikPrismApp.ViewModels
             }
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             if (!BlikCode.HasValue)
             {
+                await NavigationService.GoBackAsync();
                 base.OnNavigatedTo(parameters);
                 return;
             }
             var paymentData = new NavigationParameters
-                    {
-                        { "operationName", "Majątek" },
-                        { "recipient", "Lichwa2000" },
-                        { "amount", 10 }
-                    };
+            {
+                { "operationName", "Majątek" },
+                { "recipient", "Lichwa2000" },
+                { "amount", 10 }
+            };
             Device.StartTimer(TimeSpan.FromSeconds(15), () =>
             {
                 NavigationService.NavigateAsync($"{nameof(BlikConfirmationPage)}", paymentData);
                 return false;
             });
-
             base.OnNavigatedTo(parameters);
         }
     }
