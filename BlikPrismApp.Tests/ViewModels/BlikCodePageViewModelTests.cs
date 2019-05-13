@@ -141,7 +141,6 @@ namespace BlikPrismApp.UnitTests.ViewModels
             // ASSERT
             mockNavigationService.Verify(n => n.NavigateAsync($"{nameof(BlikConfirmationPage)}",
                 It.IsAny<INavigationParameters>()), Times.Once);
-
         }
     }
 }

@@ -3,6 +3,7 @@ using BlikPrismApp.Services.SignIn;
 using BlikPrismApp.Views;
 using Prism.Navigation;
 using Prism.Services;
+using ReactiveUI;
 using System;
 using Xamarin.Forms;
 
@@ -17,7 +18,7 @@ namespace BlikPrismApp.ViewModels
 
         #region PROPS
         private int? _blikCode = null;
-        public int? BlikCode { get => _blikCode; set => SetProperty(ref _blikCode, value); }
+        public int? BlikCode { get => _blikCode; set => this.RaiseAndSetIfChanged(ref _blikCode, value); }
         #endregion
 
         public BlikCodePageViewModel(INavigationService navigationService, IBlikService blikService,
@@ -29,8 +30,6 @@ namespace BlikPrismApp.ViewModels
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            IsBusy = true;
-
             string username;
             username = parameters.TryGetValue(nameof(username), out username)
                 ? username ?? string.Empty
@@ -39,20 +38,19 @@ namespace BlikPrismApp.ViewModels
             if (string.IsNullOrWhiteSpace(username))
                 await NavigationService.GoBackAsync();
 
-            try
-            {
-                var userDto = new UserDto(username, string.Empty);
-                BlikCode = await _blikService.GetBlikCodeAsync(userDto);
-            }
-            catch (Exception ex)
-            {
-                await _dialogService.DisplayAlertAsync("Oops!", ex.Message, "Ok");
-            }
-            finally
-            {
-                IsBusy = false;
-                base.OnNavigatingTo(parameters);
-            }
+            var userDto = new UserDto(username, string.Empty);
+
+            var cmd = ReactiveCommand.CreateFromTask(async n => await _blikService.GetBlikCodeAsync(userDto));
+
+            this.WhenAnyValue(vm => cmd.IsExecuting)
+                .ToProperty(source: this, property: vm => vm.IsBusy);
+
+            cmd.Subscribe(result => BlikCode = result);
+
+            cmd.ThrownExceptions.Subscribe(async ex =>
+                await _dialogService.DisplayAlertAsync("Oops!", ex.Message, "Ok"));
+
+            base.OnNavigatingTo(parameters);
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)

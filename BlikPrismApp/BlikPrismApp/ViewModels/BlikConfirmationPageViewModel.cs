@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
+﻿using ReactiveUI;
 
 namespace BlikPrismApp.ViewModels
 {
@@ -12,13 +13,13 @@ namespace BlikPrismApp.ViewModels
 
         #region PROPS
         private string _recipient;
-        public string Recipient { get => _recipient; set => SetProperty(ref _recipient, value); }
+        public string Recipient { get => _recipient; set => this.RaiseAndSetIfChanged(ref _recipient, value); }
 
         private string _operationName;
-        public string OperationName { get => _operationName; set => SetProperty(ref _operationName, value); }
+        public string OperationName { get => _operationName; set => this.RaiseAndSetIfChanged(ref _operationName, value); }
 
         private int _amount;
-        public int Amount { get => _amount; set => SetProperty(ref _amount, value); }
+        public int Amount { get => _amount; set => this.RaiseAndSetIfChanged(ref _amount, value); }
 
         private string _pinCode = string.Empty;
         public string PinCode { get => _pinCode; set => SetProperty(ref _pinCode, value); }

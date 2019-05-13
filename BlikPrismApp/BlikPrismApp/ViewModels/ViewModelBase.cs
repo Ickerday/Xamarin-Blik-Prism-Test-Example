@@ -1,19 +1,19 @@
-﻿using Prism.Mvvm;
-using Prism.Navigation;
+﻿using Prism.Navigation;
+using ReactiveUI;
 using System.Threading.Tasks;
 
 namespace BlikPrismApp.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IDestructible
+    public class ViewModelBase : ReactiveObject, INavigationAware, IDestructible
     {
         protected readonly INavigationService NavigationService;
 
         #region PROPS
         private string _title;
-        public string Title { get => _title; set => SetProperty(ref _title, value); }
+        public string Title { get => _title; set => this.RaiseAndSetIfChanged(ref _title, value); }
 
-        private bool _isBusy;
-        public bool IsBusy { get => _isBusy; set => SetProperty(ref _isBusy, value); }
+        private ObservableAsPropertyHelper<bool> _isBusy;
+        public bool IsBusy => _isBusy.Value;
         #endregion
 
         public ViewModelBase(INavigationService navigationService) =>

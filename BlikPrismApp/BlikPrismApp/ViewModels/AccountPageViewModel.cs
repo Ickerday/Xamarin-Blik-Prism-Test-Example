@@ -1,6 +1,5 @@
 ﻿using BlikPrismApp.Views;
-using Prism.Commands;
-using Prism.Navigation;
+using ReactiveUI;
 
 namespace BlikPrismApp.ViewModels
 {
@@ -8,7 +7,7 @@ namespace BlikPrismApp.ViewModels
     {
         #region PROPS
         private string _username;
-        public string Username { get => _username; set => SetProperty(ref _username, value); }
+        public string Username { get => _username; set => this.RaiseAndSetIfChanged(ref _username, value); }
         #endregion
 
         #region COMMANDS

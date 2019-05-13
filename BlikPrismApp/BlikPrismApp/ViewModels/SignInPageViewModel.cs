@@ -1,8 +1,6 @@
 ﻿using BlikPrismApp.Services.SignIn;
 using BlikPrismApp.Views;
-using Prism.Commands;
-using Prism.Navigation;
-using Prism.Services;
+using ReactiveUI;
 using System;
 using Xamarin.Forms;
 
@@ -21,7 +19,7 @@ namespace BlikPrismApp.ViewModels
         {
             get => _username; set
             {
-                SetProperty(ref _username, value);
+                this.RaiseAndSetIfChanged(ref _username, value);
                 IsLoginEnabled = IsLoginInfoValid();
             }
         }
@@ -31,7 +29,7 @@ namespace BlikPrismApp.ViewModels
         {
             get => _password; set
             {
-                SetProperty(ref _password, value);
+                this.RaiseAndSetIfChanged(ref _password, value);
                 IsLoginEnabled = IsLoginInfoValid();
             }
         }
