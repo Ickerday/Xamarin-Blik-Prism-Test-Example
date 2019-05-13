@@ -1,9 +1,16 @@
-﻿using Prism.Navigation;
+﻿using Prism.Commands;
+using Prism.Navigation;
+using Prism.Services;
 
 namespace BlikPrismApp.ViewModels
 {
     public class BlikConfirmationPageViewModel : ViewModelBase
     {
+        #region SERVICES
+        private readonly IPageDialogService _dialogService;
+        #endregion
+
+        #region PROPS
         private string _recipient;
         public string Recipient { get => _recipient; set => SetProperty(ref _recipient, value); }
 
@@ -13,8 +20,23 @@ namespace BlikPrismApp.ViewModels
         private int _amount;
         public int Amount { get => _amount; set => SetProperty(ref _amount, value); }
 
-        public BlikConfirmationPageViewModel(INavigationService navigationService) : base(navigationService) =>
+        private string _pinCode = string.Empty;
+        public string PinCode { get => _pinCode; set => SetProperty(ref _pinCode, value); }
+        #endregion
+
+        #region COMMANDS
+        private DelegateCommand _confirmBlikCodeCommand;
+        public DelegateCommand ConfirmBlikCode => _confirmBlikCodeCommand
+            ?? (_confirmBlikCodeCommand = new DelegateCommand(ExecuteConfirmBlikCode));
+        #endregion
+
+
+        public BlikConfirmationPageViewModel(INavigationService navigationService, IPageDialogService dialogService) : base(navigationService)
+        {
             Title = "Confirm BLIK payment";
+
+            _dialogService = dialogService;
+        }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -34,6 +56,14 @@ namespace BlikPrismApp.ViewModels
                 : 0;
 
             base.OnNavigatingTo(parameters);
+        }
+
+        private async void ExecuteConfirmBlikCode()
+        {
+            await _dialogService.DisplayAlertAsync("Yay!", "Operation confirmed", "Ok");
+
+            await NavigationService.GoBackAsync();
+            await NavigationService.GoBackAsync();
         }
     }
 }

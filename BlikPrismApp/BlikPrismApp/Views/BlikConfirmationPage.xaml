@@ -6,21 +6,27 @@
              x:Class="BlikPrismApp.Views.BlikConfirmationPage">
     <StackLayout Margin="5" 
                  Spacing="20">
-        <StackLayout Margin="10" Spacing="5">
+        <StackLayout Margin="10" Spacing="10">
 
-            <Label Text="{Binding Recipient}" />
+            <Label Text="{Binding Recipient}" 
+                   FontSize="Large" />
 
-            <Label Text="{Binding OperationName}" />
+            <Label Text="{Binding OperationName}"
+                   FontSize="Large" />
 
-            <Label Text="{Binding Amount}" />
+            <Label Text="{Binding Amount}"
+                   FontSize="Large" />
 
         </StackLayout>
 
-        <Label Text="Confirm payment:" />
+        <Label Text="Confirm payment:" 
+               FontSize="Small" />
 
-        <Entry Placeholder="PIN" />
+        <Entry Placeholder="PIN"
+               Text="{Binding PinCode, Mode=OneWayToSource}" />
 
-        <Button Text="Confirm" />
+        <Button Text="Confirm" 
+                Command="{Binding ConfirmBlikCode}" />
 
     </StackLayout>
 </ContentPage>

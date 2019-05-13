@@ -31,6 +31,8 @@ namespace BlikPrismApp.ViewModels
             if (string.IsNullOrWhiteSpace(Username))
                 await NavigationService.NavigateAsync($"/{nameof(SignInPage)}");
 
+            GetBlikCodeCommand.RaiseCanExecuteChanged();
+
             IsBusy = false;
 
             base.OnNavigatingTo(parameters);
